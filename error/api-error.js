@@ -1,6 +1,6 @@
 import BaseError from "./base-error.js";
-import { errorTypes } from "./error-constant.js";
-import { httpStatusText } from "../utils/http-status.js";
+import { errorTypes } from "../config/constants/error.js";
+import { httpStatusText } from "../config/constants/http.js";
 
 class ApiError extends BaseError {
   constructor(httpCode, message) {

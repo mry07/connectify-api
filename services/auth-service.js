@@ -1,17 +1,17 @@
-import DB from "../database.js";
 import Bcrypt from "bcrypt";
-import ApiError from "../errors/api-error.js";
-import DevError from "../errors/dev-error.js";
-import TokenError from "../errors/token-error.js";
+import ApiError from "../error/api-error.js";
+import DevError from "../error/dev-error.js";
+import TokenError from "../error/token-error.js";
 import JsonWebToken from "jsonwebtoken";
-import { httpStatus } from "../utils/http-status.js";
-import { errorTypes } from "../errors/error-constant.js";
+import { Pool } from "../config/database.js";
+import { httpStatus } from "../config/constants/http.js";
+import { errorTypes } from "../config/constants/error.js";
 import { generateToken, generateRefreshToken } from "../utils/jwt.js";
 
 export const login = async (req) => {
   const appId = req.headers["app-id"];
   const { email, password } = req.body;
-  const connection = await DB.getConnection();
+  const connection = await Pool.getConnection();
 
   try {
     await connection.beginTransaction();
@@ -70,7 +70,7 @@ export const login = async (req) => {
 
 export const logout = async (req) => {
   const { sub, iss } = req.jwt;
-  const connection = await DB.getConnection();
+  const connection = await Pool.getConnection();
 
   try {
     await connection.beginTransaction();
@@ -97,7 +97,7 @@ export const logout = async (req) => {
 
 export const register = async (req) => {
   const { name, username, email, password } = req.body;
-  const connection = await DB.getConnection();
+  const connection = await Pool.getConnection();
 
   try {
     await connection.beginTransaction();
@@ -137,7 +137,7 @@ export const register = async (req) => {
 export const refreshToken = async (req) => {
   const appId = req.headers["app-id"];
   const { refresh_token } = req.body;
-  const connection = await DB.getConnection();
+  const connection = await Pool.getConnection();
 
   try {
     await connection.beginTransaction();
@@ -151,7 +151,11 @@ export const refreshToken = async (req) => {
       [appId, refresh_token]
     );
     if (!rows.length) {
-      throw new DevError(httpStatus.UNAUTHORIZED, "relogin_required", "Mohon lakukan login ulang");
+      throw new DevError(
+        httpStatus.UNAUTHORIZED,
+        "relogin_required",
+        "Mohon lakukan login ulang"
+      );
     }
 
     // verify refresh token

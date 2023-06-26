@@ -1,7 +1,7 @@
-import ApiError from "../errors/api-error.js";
+import ApiError from "../error/api-error.js";
 import * as Time from "../utils/time.js";
 import { rateLimit, RateLimitExceededEventHandler } from "express-rate-limit";
-import { httpStatus } from "../utils/http-status.js";
+import { httpStatus } from "../config/constants/http.js";
 
 interface Options {
   timeout?: number;

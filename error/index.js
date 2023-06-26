@@ -1,8 +1,7 @@
-import { errorTypes } from "./error-constant.js";
-import { httpStatus } from "../utils/http-status.js";
+import { errorTypes } from "../config/constants/error.js";
+import { httpStatus } from "../config/constants/http.js";
 
-export const errorHandler = (err, req, res, next) => {
-  console.log(err);
+export const handler = (err, req, res, next) => {
   switch (err.errorType) {
     case errorTypes.API_ERROR:
       res.status(err.httpCode).send({

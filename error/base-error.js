@@ -1,4 +1,4 @@
-import { errorTypes } from "./error-constant.js";
+import { errorTypes } from "../config/constants/error.js";
 
 class BaseError extends Error {
   constructor({ message, errorType, errorCode, httpCode, httpStatus, errors }) {

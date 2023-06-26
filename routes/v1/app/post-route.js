@@ -1,7 +1,7 @@
-import Auth from "../../../middlewares/auth.js";
+import Auth from "../../../middleware/auth.js";
 import Multer from "multer";
 import Express from "express";
-import Validate from "../../../middlewares/validate.js";
+import Validate from "../../../middleware/validate.js";
 import * as Controller from "../../../controllers/post-controller.js";
 import * as Validation from "../../../validations/post-validation.js";
 

@@ -1,7 +1,7 @@
 import JsonWebToken from "jsonwebtoken";
 import BaseError from "./base-error.js";
-import { errorTypes } from "./error-constant.js";
-import { httpStatus, httpStatusText } from "../utils/http-status.js";
+import { errorTypes } from "../config/constants/error.js";
+import { httpStatus, httpStatusText } from "../config/constants/http.js";
 
 class TokenError extends BaseError {
   constructor(error) {

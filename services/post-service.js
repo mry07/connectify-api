@@ -1,13 +1,13 @@
-import DB from "../database.js";
-import ApiError from "../errors/api-error.js";
+import ApiError from "../error/api-error.js";
+import DevError from "../error/dev-error.js";
+import { Pool } from "../config/database.js";
+import { httpStatus } from "../config/constants/http.js";
 import { saveToUploads } from "../utils/image.js";
-import { httpStatus } from "../utils/http-status.js";
-import DevError from "../errors/dev-error.js";
 
 export const newPost = async (req) => {
   const { sub } = req.jwt;
   const { content } = req.body;
-  const connection = await DB.getConnection();
+  const connection = await Pool.getConnection();
 
   try {
     await connection.beginTransaction();
@@ -46,7 +46,7 @@ export const newPost = async (req) => {
 
 export const getPosts = async (req) => {
   const appId = req.headers["app-id"];
-  const connection = await DB.getConnection();
+  const connection = await Pool.getConnection();
 
   try {
     await connection.beginTransaction();
@@ -57,6 +57,7 @@ export const getPosts = async (req) => {
         p.user_id,
         u.name,
         u.username,
+        u.avatar,
         COALESCE(sub_i2.like, 0) is_liked,
         COALESCE(sub_i2.dislike, 0) is_disliked,
         COALESCE(sub_i1.likes, 0) likes,
@@ -134,7 +135,7 @@ export const getPosts = async (req) => {
 export const likeDislike = async (req) => {
   const { sub } = req.jwt;
   const { post_id, like, dislike } = req.body;
-  const connection = await DB.getConnection();
+  const connection = await Pool.getConnection();
 
   try {
     await connection.beginTransaction();
@@ -172,7 +173,7 @@ export const likeDislike = async (req) => {
 export const comment = async (req) => {
   const { sub } = req.jwt;
   const { post_id, comment } = req.body;
-  const connection = await DB.getConnection();
+  const connection = await Pool.getConnection();
 
   try {
     await connection.beginTransaction();
@@ -201,7 +202,7 @@ export const comment = async (req) => {
 
 export const getComments = async (req) => {
   const { post_id, pagination } = req.body;
-  const connection = await DB.getConnection();
+  const connection = await Pool.getConnection();
 
   try {
     await connection.beginTransaction();

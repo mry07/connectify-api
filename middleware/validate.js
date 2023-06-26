@@ -1,4 +1,4 @@
-import ValidationError from "../errors/validation-error.js";
+import ValidationError from "../error/validation-error.js";
 
 const Validate = (schema) => async (req, res, next) => {
   try {

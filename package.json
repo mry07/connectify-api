@@ -6,8 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "app": "nodemon --exec ts-node --esm app-server.js",
-    "auth": "nodemon --exec ts-node --esm auth-server.js"
+    "app": "nodemon --exec ts-node --esm app.js",
+    "auth": "nodemon --exec ts-node --esm auth.js",
+    "start": "yarn app & yarn auth"
   },
   "type": "module",
   "keywords": [],

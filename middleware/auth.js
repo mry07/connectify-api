@@ -1,8 +1,8 @@
-import DevError from "../errors/dev-error.js";
-import TokenError from "../errors/token-error.js";
+import DevError from "../error/dev-error.js";
+import TokenError from "../error/token-error.js";
 import JsonWebToken from "jsonwebtoken";
-import { errorTypes } from "../errors/error-constant.js";
-import { httpStatus } from "../utils/http-status.js";
+import { errorTypes } from "../config/constants/error.js";
+import { httpStatus } from "../config/constants/http.js";
 
 const Auth = (roles = []) => {
   return async (req, res, next) => {

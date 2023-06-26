@@ -1,7 +1,7 @@
 import Mysql from "mysql2/promise";
-import * as Time from "./utils/time.js";
+import * as Time from "../utils/time.js";
 
-const Pool = Mysql.createPool({
+export const Pool = Mysql.createPool({
   host: "localhost",
   user: "root",
   password: "root",
@@ -11,5 +11,3 @@ const Pool = Mysql.createPool({
   maxIdle: 0,
   idleTimeout: 10 * Time.SECONDS,
 });
-
-export default Pool;

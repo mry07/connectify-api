@@ -1,7 +1,7 @@
-import Auth from "../../../middlewares/auth.js";
+import Auth from "../../../middleware/auth.js";
 import Express from "express";
-import Limiter from "../../../middlewares/limiter.js";
-import Validate from "../../../middlewares/validate.js";
+import Limiter from "../../../middleware/limiter.js";
+import Validate from "../../../middleware/validate.js";
 import * as Time from "../../../utils/time.js";
 import * as Controller from "../../../controllers/auth-controller.js";
 import * as Validation from "../../../validations/auth-validation.js";

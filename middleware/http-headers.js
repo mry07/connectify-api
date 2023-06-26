@@ -1,5 +1,5 @@
-import DevError from "../errors/dev-error.js";
-import { httpStatus } from "../utils/http-status.js";
+import DevError from "../error/dev-error.js";
+import { httpStatus } from "../config/constants/http.js";
 
 const HttpHeaders = (req, res, next) => {
   const appId = req.headers["app-id"];
