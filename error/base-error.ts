@@ -1,31 +1,38 @@
-import * as Types from "./types/base-error";
-import * as ErrorType from "../config/constants/error-type";
+import { ErrorType, BaseErrorProps } from "./index.types";
 
 class BaseError extends Error {
-  errorType: Types.ErrorType;
-  errorCode?: string;
+  type: ErrorType;
+
+  code?: string;
+
   httpCode: number;
+
   httpStatus: string;
+
   errors?: any;
 
-  constructor(props: Types.BaseErrorProps) {
-    super(props.message);
-    Object.setPrototypeOf(this, new.target.prototype);
-
-    this.errorType = props.errorType;
+  constructor({
+    message,
+    errorType,
+    errorCode,
+    httpCode,
+    httpStatus,
+    errors,
+  }: BaseErrorProps) {
+    super(message);
+    this.type = errorType;
+    this.httpCode = httpCode;
+    this.httpStatus = httpStatus;
 
     if (
-      props.errorType === ErrorType.DEV_ERROR ||
-      props.errorType === ErrorType.TOKEN_ERROR
+      errorType === ErrorType.DevError ||
+      errorType === ErrorType.TokenError
     ) {
-      this.errorCode = props.errorCode;
+      this.code = errorCode;
     }
 
-    this.httpCode = props.httpCode;
-    this.httpStatus = props.httpStatus;
-
-    if (props.errorType === ErrorType.VALIDATION_ERROR) {
-      this.errors = props.errors;
+    if (errorType === ErrorType.ValidationError) {
+      this.errors = errors;
     }
 
     Error.captureStackTrace(this);

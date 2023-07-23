@@ -1,12 +1,12 @@
 import ApiError from "../error/api-error";
 import * as Time from "./constants/time";
 import { Options } from "express-rate-limit";
-import { httpStatus } from "./constants/http";
+import * as HttpStatus from "./constants/http-status";
 import { RequestHandler } from "express";
 
 const handler: RequestHandler = (req, res, next) => {
   const message = "Terlalu banyak permintaan";
-  next(new ApiError(httpStatus.TOO_MANY_REQUESTS, message));
+  next(new ApiError(HttpStatus.TOO_MANY_REQUESTS, message));
 };
 
 export const authLogin: Partial<Options> = {

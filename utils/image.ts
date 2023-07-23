@@ -2,13 +2,7 @@ import Sharp from "sharp";
 import * as Crypto from "crypto";
 import * as Blurhash from "blurhash";
 import * as FileSystem from "fs/promises";
-import { Request } from "express";
-
-interface StoreImage {
-  (req: Request, path: string): Promise<
-    { filename: string; blurhash: string }[]
-  >;
-}
+import { StoreImage } from "./image.types";
 
 export const storeImage: StoreImage = async (req, path) => {
   const images = [];
@@ -16,7 +10,10 @@ export const storeImage: StoreImage = async (req, path) => {
 
   for (const file of files) {
     const metadata = await Sharp(file.path).metadata();
-    const ratio = (metadata.width ?? 0) / (metadata.height ?? 0);
+    const mw = metadata.width ?? 0;
+    const mh = metadata.height ?? 0;
+
+    const ratio = mw / mh;
     const w = 720;
     const h = Math.round(w / ratio);
 

@@ -1,18 +1,15 @@
 import BaseError from "./base-error";
-import * as ErrorType from "../config/constants/error-type";
+import { ErrorType } from "./index.types";
 import { httpStatusText } from "../utils/http";
-import { BaseErrorProps } from "./types/base-error";
 
 class ApiError extends BaseError {
   constructor(httpCode: number, message: string) {
-    const props: BaseErrorProps = {
+    super({
       message,
-      errorType: ErrorType.API_ERROR,
+      errorType: ErrorType.ApiError,
       httpCode,
       httpStatus: httpStatusText(httpCode),
-    };
-
-    super(props);
+    });
   }
 }
 

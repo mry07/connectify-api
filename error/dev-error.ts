@@ -1,13 +1,12 @@
 import BaseError from "./base-error";
-import * as ErrorType from "../config/constants/error-type";
 import { httpStatusText } from "../utils/http";
-import * as Types from "./types/base-error";
+import { BaseErrorProps, ErrorType } from "./index.types";
 
 class DevError extends BaseError {
   constructor(httpCode: number, errorCode: string, message?: string) {
-    const props: Types.BaseErrorProps = {
+    const props: BaseErrorProps = {
       message,
-      errorType: ErrorType.DEV_ERROR,
+      errorType: ErrorType.DevError,
       errorCode,
       httpCode,
       httpStatus: httpStatusText(httpCode),

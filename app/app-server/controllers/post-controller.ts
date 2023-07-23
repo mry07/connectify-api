@@ -1,6 +1,6 @@
 import * as Service from "../services/post-service";
 import { RequestHandler } from "express";
-import { httpStatus } from "../../../config/constants/http";
+import * as HttpStatus from "../../../config/constants/http-status";
 import DevError from "../../../error/dev-error";
 
 export const newPost: RequestHandler = async (req, res, next) => {
@@ -50,7 +50,7 @@ export const getComments: RequestHandler = async (req, res, next) => {
       pagination.last_id === undefined
     ) {
       throw new DevError(
-        httpStatus.BAD_REQUEST,
+        HttpStatus.BAD_REQUEST,
         "missing_parameters",
         "Pastikan parameter `post_id`, `pagination.limit`, dan `pagination.last_id` telah kamu kirim"
       );

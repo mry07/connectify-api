@@ -1,34 +1,31 @@
-import JsonWebToken from "jsonwebtoken";
 import BaseError from "./base-error";
-import * as ErrorType from "../config/constants/error-type";
-import { httpStatus } from "../config/constants/http";
+import JsonWebToken from "jsonwebtoken";
+import * as HttpStatus from "../config/constants/http-status";
 import { httpStatusText } from "../utils/http";
-import { BaseErrorProps } from "./types/base-error";
+import { BaseErrorProps, ErrorType } from "./index.types";
 
 class TokenError extends BaseError {
   constructor(error: any) {
-    const httpCode = httpStatus.INTERNAL_SERVER_ERROR;
-    const props: BaseErrorProps = {
-      httpCode,
-      errorType: ErrorType.TOKEN_ERROR,
-      httpStatus: httpStatusText(httpCode),
-    };
+    let message;
+    let errorCode;
+    let errorType = ErrorType.TokenError;
+    let httpCode = HttpStatus.INTERNAL_SERVER_ERROR;
 
     if (error instanceof JsonWebToken.JsonWebTokenError) {
-      props.message = "Token tidak valid";
-      props.errorCode = "invalid_token";
-      props.httpCode = httpStatus.FORBIDDEN;
+      message = "Token tidak valid";
+      errorCode = "invalid_token";
+      httpCode = HttpStatus.FORBIDDEN;
     }
 
     if (error instanceof JsonWebToken.TokenExpiredError) {
-      props.message = "Token kadaluarsa";
-      props.errorCode = "expired_token";
-      props.httpCode = httpStatus.UNAUTHORIZED;
+      message = "Token kadaluarsa";
+      errorCode = "expired_token";
+      httpCode = HttpStatus.UNAUTHORIZED;
     }
 
-    props.httpStatus = httpStatusText(props.httpCode);
+    let httpStatus = httpStatusText(httpCode);
 
-    super(props);
+    super({ message, errorCode, errorType, httpCode, httpStatus });
   }
 }
 

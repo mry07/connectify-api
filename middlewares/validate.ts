@@ -1,5 +1,5 @@
 import ValidationError from "../error/validation-error";
-import { ValidateMidd } from "./types/validate";
+import { ValidateMidd } from "./validate.types";
 
 const Validate: ValidateMidd = (schema) => async (req, res, next) => {
   try {

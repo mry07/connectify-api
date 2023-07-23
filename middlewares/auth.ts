@@ -1,23 +1,21 @@
 import BaseError from "../error/base-error";
 import TokenError from "../error/token-error";
 import JsonWebToken from "jsonwebtoken";
-import * as ErrorType from "../config/constants/error-type";
-import { httpStatus as httpStatusCode } from "../config/constants/http";
+import * as HttpStatus from "../config/constants/http-status";
+import { AuthMidd } from "./auth.types";
+import { TokenPayload } from "../utils/token.types";
 import { httpStatusText } from "../utils/http";
-import { BaseErrorProps } from "../error/types/base-error";
-import { TokenPayload } from "../utils/types/token";
-import { AuthMidd } from "./types/auth";
+import { BaseErrorProps, ErrorType } from "../error/index.types";
 
 const Auth: AuthMidd = (roles) => (req, res, next) => {
   const appId = req.headers["app-id"];
   const author = req.headers.authorization;
   const token = author?.split(" ")[1];
-  const httpCode = httpStatusCode.UNAUTHORIZED;
-  const error: BaseErrorProps = {
-    httpCode,
-    errorType: ErrorType.TOKEN_ERROR,
-    httpStatus: httpStatusText(httpCode),
-  };
+
+  let errorType = ErrorType.TokenError;
+  let httpCode = HttpStatus.UNAUTHORIZED;
+  let httpStatus = httpStatusText(httpCode);
+  let error: BaseErrorProps = { errorType, httpCode, httpStatus };
 
   try {
     // check token
@@ -58,13 +56,5 @@ const Auth: AuthMidd = (roles) => (req, res, next) => {
     next(tokenError);
   }
 };
-
-declare global {
-  namespace Express {
-    export interface Request {
-      jwt?: any;
-    }
-  }
-}
 
 export default Auth;

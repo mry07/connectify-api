@@ -14,6 +14,6 @@ Server.use("/api/v1", Routes);
 
 // error handler
 Server.use(Error.handler);
-Server.use(Error.endpointError);
+Server.use(Error.endpoint);
 
 export default Server;

@@ -1,130 +1,130 @@
-import { httpStatus } from "../config/constants/http";
+import * as HttpStatus from "../config/constants/http-status";
 
 export const httpStatusText = (status: number) => {
   switch (status) {
-    case httpStatus.CONTINUE:
+    case HttpStatus.CONTINUE:
       return "Continue";
-    case httpStatus.SWITCHING_PROTOCOLS:
+    case HttpStatus.SWITCHING_PROTOCOLS:
       return "Switching Protocols";
-    case httpStatus.PROCESSING:
+    case HttpStatus.PROCESSING:
       return "Processing";
-    case httpStatus.EARLY_HINTS:
+    case HttpStatus.EARLY_HINTS:
       return "Early Hints";
-    case httpStatus.OK:
+    case HttpStatus.OK:
       return "OK";
-    case httpStatus.CREATED:
+    case HttpStatus.CREATED:
       return "Created";
-    case httpStatus.ACCEPTED:
+    case HttpStatus.ACCEPTED:
       return "Accepted";
-    case httpStatus.NON_AUTHORITATIVE_INFO:
+    case HttpStatus.NON_AUTHORITATIVE_INFO:
       return "Non-Authoritative Information";
-    case httpStatus.NO_CONTENT:
+    case HttpStatus.NO_CONTENT:
       return "No Content";
-    case httpStatus.RESET_CONTENT:
+    case HttpStatus.RESET_CONTENT:
       return "Reset Content";
-    case httpStatus.PARTIAL_CONTENT:
+    case HttpStatus.PARTIAL_CONTENT:
       return "Partial Content";
-    case httpStatus.MULTI_STATUS:
+    case HttpStatus.MULTI_STATUS:
       return "Multi-Status";
-    case httpStatus.ALREADY_REPORTED:
+    case HttpStatus.ALREADY_REPORTED:
       return "Already Reported";
-    case httpStatus.IM_USED:
+    case HttpStatus.IM_USED:
       return "IM Used";
-    case httpStatus.MULTIPLE_CHOICES:
+    case HttpStatus.MULTIPLE_CHOICES:
       return "Multiple Choices";
-    case httpStatus.MOVED_PERMANENTLY:
+    case HttpStatus.MOVED_PERMANENTLY:
       return "Moved Permanently";
-    case httpStatus.FOUND:
+    case HttpStatus.FOUND:
       return "Found";
-    case httpStatus.SEE_OTHER:
+    case HttpStatus.SEE_OTHER:
       return "See Other";
-    case httpStatus.NOT_MODIFIED:
+    case HttpStatus.NOT_MODIFIED:
       return "Not Modified";
-    case httpStatus.USE_PROXY:
+    case HttpStatus.USE_PROXY:
       return "Use Proxy";
-    case httpStatus.TEMPORARY_REDIRECT:
+    case HttpStatus.TEMPORARY_REDIRECT:
       return "Temporary Redirect";
-    case httpStatus.PERMANENT_REDIRECT:
+    case HttpStatus.PERMANENT_REDIRECT:
       return "Permanent Redirect";
-    case httpStatus.BAD_REQUEST:
+    case HttpStatus.BAD_REQUEST:
       return "Bad Request";
-    case httpStatus.UNAUTHORIZED:
+    case HttpStatus.UNAUTHORIZED:
       return "Unauthorized";
-    case httpStatus.PAYMENT_REQUIRED:
+    case HttpStatus.PAYMENT_REQUIRED:
       return "Payment Required";
-    case httpStatus.FORBIDDEN:
+    case HttpStatus.FORBIDDEN:
       return "Forbidden";
-    case httpStatus.NOT_FOUND:
+    case HttpStatus.NOT_FOUND:
       return "Not Found";
-    case httpStatus.METHOD_NOT_ALLOWED:
+    case HttpStatus.METHOD_NOT_ALLOWED:
       return "Method Not Allowed";
-    case httpStatus.NOT_ACCEPTABLE:
+    case HttpStatus.NOT_ACCEPTABLE:
       return "Not Acceptable";
-    case httpStatus.PROXY_AUTH_REQUIRED:
+    case HttpStatus.PROXY_AUTH_REQUIRED:
       return "Proxy Authentication Required";
-    case httpStatus.REQUEST_TIMEOUT:
+    case HttpStatus.REQUEST_TIMEOUT:
       return "Request Timeout";
-    case httpStatus.CONFLICT:
+    case HttpStatus.CONFLICT:
       return "Conflict";
-    case httpStatus.GONE:
+    case HttpStatus.GONE:
       return "Gone";
-    case httpStatus.LENGTH_REQUIRED:
+    case HttpStatus.LENGTH_REQUIRED:
       return "Length Required";
-    case httpStatus.PRECONDITION_FAILED:
+    case HttpStatus.PRECONDITION_FAILED:
       return "Precondition Failed";
-    case httpStatus.PAYLOAD_TOO_LARGE:
+    case HttpStatus.PAYLOAD_TOO_LARGE:
       return "Request Entity Too Large";
-    case httpStatus.URI_TOO_LONG:
+    case HttpStatus.URI_TOO_LONG:
       return "Request URI Too Long";
-    case httpStatus.UNSUPPORTED_MEDIA_TYPE:
+    case HttpStatus.UNSUPPORTED_MEDIA_TYPE:
       return "Unsupported Media Type";
-    case httpStatus.RANGE_NOT_SATISFIABLE:
+    case HttpStatus.RANGE_NOT_SATISFIABLE:
       return "Requested Range Not Satisfiable";
-    case httpStatus.EXPECTATION_FAILED:
+    case HttpStatus.EXPECTATION_FAILED:
       return "Expectation Failed";
-    case httpStatus.TEAPOT:
+    case HttpStatus.TEAPOT:
       return "I'm a teapot";
-    case httpStatus.MISDIRECTED_REQUEST:
+    case HttpStatus.MISDIRECTED_REQUEST:
       return "Misdirected Request";
-    case httpStatus.UNPROCESSABLE_CONTENT:
+    case HttpStatus.UNPROCESSABLE_CONTENT:
       return "Unprocessable Entity";
-    case httpStatus.LOCKED:
+    case HttpStatus.LOCKED:
       return "Locked";
-    case httpStatus.FAILED_DEPENDENCY:
+    case HttpStatus.FAILED_DEPENDENCY:
       return "Failed Dependency";
-    case httpStatus.TOO_EARLY:
+    case HttpStatus.TOO_EARLY:
       return "Too Early";
-    case httpStatus.UPGRADE_REQUIRED:
+    case HttpStatus.UPGRADE_REQUIRED:
       return "Upgrade Required";
-    case httpStatus.PRECONDITION_REQUIRED:
+    case HttpStatus.PRECONDITION_REQUIRED:
       return "Precondition Required";
-    case httpStatus.TOO_MANY_REQUESTS:
+    case HttpStatus.TOO_MANY_REQUESTS:
       return "Too Many Requests";
-    case httpStatus.REQUEST_HEADER_FIELDS_TOO_LARGE:
+    case HttpStatus.REQUEST_HEADER_FIELDS_TOO_LARGE:
       return "Request Header Fields Too Large";
-    case httpStatus.UNAVAILABLE_FOR_LEGAL_REASONS:
+    case HttpStatus.UNAVAILABLE_FOR_LEGAL_REASONS:
       return "Unavailable For Legal Reasons";
-    case httpStatus.INTERNAL_SERVER_ERROR:
+    case HttpStatus.INTERNAL_SERVER_ERROR:
       return "Internal Server Error";
-    case httpStatus.NOT_IMPLEMENTED:
+    case HttpStatus.NOT_IMPLEMENTED:
       return "Not Implemented";
-    case httpStatus.BAD_GATEWAY:
+    case HttpStatus.BAD_GATEWAY:
       return "Bad Gateway";
-    case httpStatus.SERVICE_UNAVAILABLE:
+    case HttpStatus.SERVICE_UNAVAILABLE:
       return "Service Unavailable";
-    case httpStatus.GATEWAY_TIMEOUT:
+    case HttpStatus.GATEWAY_TIMEOUT:
       return "Gateway Timeout";
-    case httpStatus.HTTP_VERSION_NOT_SUPPORTED:
+    case HttpStatus.HTTP_VERSION_NOT_SUPPORTED:
       return "HTTP Version Not Supported";
-    case httpStatus.VARIANT_ALSO_NEGOTIATES:
+    case HttpStatus.VARIANT_ALSO_NEGOTIATES:
       return "Variant Also Negotiates";
-    case httpStatus.INSUFFICIENT_STORAGE:
+    case HttpStatus.INSUFFICIENT_STORAGE:
       return "Insufficient Storage";
-    case httpStatus.LOOP_DETECTED:
+    case HttpStatus.LOOP_DETECTED:
       return "Loop Detected";
-    case httpStatus.NOT_EXTENDED:
+    case HttpStatus.NOT_EXTENDED:
       return "Not Extended";
-    case httpStatus.NETWORK_AUTHENTICATION_REQUIRED:
+    case HttpStatus.NETWORK_AUTHENTICATION_REQUIRED:
       return "Network Authentication Required";
     default:
       return "";

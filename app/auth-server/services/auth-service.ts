@@ -4,14 +4,14 @@ import DevError from "../../../error/dev-error";
 import BaseError from "../../../error/base-error";
 import TokenError from "../../../error/token-error";
 import JsonWebToken from "jsonwebtoken";
-import * as ErrorType from "../../../config/constants/error-type";
+import * as HttpStatus from "../../../config/constants/http-status";
 import { pool } from "../../../config/database";
-import { httpStatus } from "../../../config/constants/http";
+import { Request } from "express";
+import { ErrorType } from "../../../error/index.types";
+import { TokenPayload } from "../../../utils/token.types";
 import { httpStatusText } from "../../../utils/http";
 import { ResultSetHeader, RowDataPacket } from "mysql2";
 import { generateToken, generateRefreshToken } from "../../../utils/token";
-import { Request } from "express";
-import { TokenPayload } from "../../../utils/types/token";
 
 export const login = async (req: Request) => {
   const appId = req.headers["app-id"];
@@ -40,17 +40,17 @@ export const login = async (req: Request) => {
     );
 
     if (!rows.length) {
-      throw new ApiError(httpStatus.NOT_FOUND, "Email tidak ditemukan");
+      throw new ApiError(HttpStatus.NOT_FOUND, "Email tidak ditemukan");
     }
 
     if (rows[0].session_status) {
-      throw new ApiError(httpStatus.CONFLICT, "Kamu sudah terautentikasi!");
+      throw new ApiError(HttpStatus.CONFLICT, "Kamu sudah terautentikasi!");
     }
 
     // authenticate password
     const match = await Bcrypt.compare(password, rows[0].password);
     if (!match) {
-      throw new ApiError(httpStatus.UNAUTHORIZED, "Password salah");
+      throw new ApiError(HttpStatus.UNAUTHORIZED, "Password salah");
     }
 
     // generate access token and refresh token
@@ -96,7 +96,7 @@ export const logout = async (req: Request) => {
 
     // session not found
     if (!rows.affectedRows) {
-      throw new ApiError(httpStatus.NOT_FOUND, "Sesi login tidak ditemukan");
+      throw new ApiError(HttpStatus.NOT_FOUND, "Sesi login tidak ditemukan");
     }
 
     await connection.commit();
@@ -124,11 +124,11 @@ export const register = async (req: Request) => {
     );
 
     if (user[0].email_exist) {
-      throw new ApiError(httpStatus.CONFLICT, "Email sudah digunakan");
+      throw new ApiError(HttpStatus.CONFLICT, "Email sudah digunakan");
     }
 
     if (user[0].username_exist) {
-      throw new ApiError(httpStatus.CONFLICT, "Username sudah digunakan");
+      throw new ApiError(HttpStatus.CONFLICT, "Username sudah digunakan");
     }
 
     // register new user
@@ -157,7 +157,7 @@ export const refreshToken = async (req: Request) => {
 
     // check `refresh_token` field
     if (refresh_token === undefined) {
-      throw new DevError(httpStatus.BAD_REQUEST, `missing_parameter`);
+      throw new DevError(HttpStatus.BAD_REQUEST, `missing_parameter`);
     }
 
     // check user session
@@ -169,7 +169,7 @@ export const refreshToken = async (req: Request) => {
     // error if session not found
     if (!rows.length) {
       throw new DevError(
-        httpStatus.UNAUTHORIZED,
+        HttpStatus.UNAUTHORIZED,
         "relogin_required",
         "Mohon lakukan login ulang"
       );
@@ -183,12 +183,12 @@ export const refreshToken = async (req: Request) => {
 
     // error if appId does not match
     if (appId !== decoded.iss) {
-      const httpCode = httpStatus.UNAUTHORIZED;
+      const httpCode = HttpStatus.UNAUTHORIZED;
 
       throw new BaseError({
         httpCode,
         errorCode: "an_error_occurred",
-        errorType: ErrorType.TOKEN_ERROR,
+        errorType: ErrorType.TokenError,
         httpStatus: httpStatusText(httpCode),
       });
     }
@@ -199,7 +199,7 @@ export const refreshToken = async (req: Request) => {
       username: decoded.username,
       email: decoded.email,
       role: decoded.role,
-      iss: appId,
+      iss: appId as string,
     });
 
     await connection.commit();
