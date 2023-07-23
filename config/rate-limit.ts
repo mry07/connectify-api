@@ -9,13 +9,15 @@ const handler: RequestHandler = (req, res, next) => {
   next(new ApiError(HttpStatus.TOO_MANY_REQUESTS, message));
 };
 
-export const authLogin: Partial<Options> = {
+// auth/login
+export const login: Partial<Options> = {
   windowMs: 5 * Time.MINUTES,
   max: 5,
   handler,
 };
 
-export const authRefreshToken: Partial<Options> = {
+// auth/refresh-token
+export const refreshToken: Partial<Options> = {
   windowMs: Time.HOURS + 5 * Time.MINUTES,
   max: 1,
   handler,

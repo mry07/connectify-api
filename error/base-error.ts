@@ -1,9 +1,9 @@
 import { ErrorType, BaseErrorProps } from "./index.types";
 
 class BaseError extends Error {
-  type: ErrorType;
+  errorType: ErrorType;
 
-  code?: string;
+  errorCode?: string;
 
   httpCode: number;
 
@@ -20,7 +20,7 @@ class BaseError extends Error {
     errors,
   }: BaseErrorProps) {
     super(message);
-    this.type = errorType;
+    this.errorType = errorType;
     this.httpCode = httpCode;
     this.httpStatus = httpStatus;
 
@@ -28,7 +28,7 @@ class BaseError extends Error {
       errorType === ErrorType.DevError ||
       errorType === ErrorType.TokenError
     ) {
-      this.code = errorCode;
+      this.errorCode = errorCode;
     }
 
     if (errorType === ErrorType.ValidationError) {

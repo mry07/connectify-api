@@ -1,9 +1,9 @@
 import ApiError from "../../../error/api-error";
 import DevError from "../../../error/dev-error";
+import * as HttpStatus from "../../../config/constants/http-status";
 import { pool } from "../../../config/database";
 import { Request } from "express";
 import { storeImage } from "../../../utils/image";
-import * as HttpStatus from "../../../config/constants/http-status";
 import { ResultSetHeader, RowDataPacket } from "mysql2";
 
 export const newPost = async (req: Request) => {
@@ -84,17 +84,14 @@ export const getPosts = async (req: Request) => {
     GROUP BY p.id, i.like, i.dislike
     ORDER BY p.id DESC`;
     const [rows] = await connection.execute<RowDataPacket[]>(sql, [sub, sub]);
-    const posts = [];
-
-    for (const row of rows) {
-      posts.push({
-        ...row,
-        is_liked: Boolean(row.is_liked),
-        is_disliked: Boolean(row.is_disliked),
-        likes: Number(row.likes),
-        dislikes: Number(row.dislikes),
-      });
-    }
+    const posts = rows.map((e) => ({
+      ...e,
+      is_followed: Boolean(e.is_followed),
+      is_liked: Boolean(e.is_liked),
+      is_disliked: Boolean(e.is_disliked),
+      likes: Number(e.likes),
+      dislikes: Number(e.dislikes),
+    }));
 
     await connection.commit();
 

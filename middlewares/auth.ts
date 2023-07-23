@@ -12,10 +12,10 @@ const Auth: AuthMidd = (roles) => (req, res, next) => {
   const author = req.headers.authorization;
   const token = author?.split(" ")[1];
 
-  let errorType = ErrorType.TokenError;
-  let httpCode = HttpStatus.UNAUTHORIZED;
-  let httpStatus = httpStatusText(httpCode);
-  let error: BaseErrorProps = { errorType, httpCode, httpStatus };
+  const errorType = ErrorType.TokenError;
+  const httpCode = HttpStatus.UNAUTHORIZED;
+  const httpStatus = httpStatusText(httpCode);
+  const error: BaseErrorProps = { errorType, httpCode, httpStatus };
 
   try {
     // check token

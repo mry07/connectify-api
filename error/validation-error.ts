@@ -1,9 +1,7 @@
 import BaseError from "./base-error";
-// import * as ErrorType from "../config/constants/error-type";
 import * as HttpStatus from "../config/constants/http-status";
+import { ErrorType } from "./index.types";
 import { httpStatusText } from "../utils/http";
-import { BaseErrorProps, ErrorType } from "./index.types";
-// import * as Types from "./types/base-error";
 
 class ValidationError extends BaseError {
   constructor(error: any) {

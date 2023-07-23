@@ -15,10 +15,10 @@ export interface ValidationErrorResponse {
 }
 
 export enum ErrorType {
-  ApiError = "api-error",
-  DevError = "dev-error",
-  TokenError = "token-error",
-  ValidationError = "validation-error",
+  ApiError = "api_error",
+  DevError = "dev_error",
+  TokenError = "signature_error",
+  ValidationError = "validation_error",
 }
 
 export interface BaseErrorProps {
