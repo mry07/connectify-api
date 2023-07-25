@@ -2,12 +2,12 @@ import BaseError from "../error/base-error";
 import TokenError from "../error/token-error";
 import JsonWebToken from "jsonwebtoken";
 import * as HttpStatus from "../config/constants/http-status";
-import { AuthMidd } from "./auth.types";
+import { AuthMw } from "./auth.types";
 import { TokenPayload } from "../utils/token.types";
 import { httpStatusText } from "../utils/http";
 import { BaseErrorProps, ErrorType } from "../error/index.types";
 
-const Auth: AuthMidd = (roles) => (req, res, next) => {
+const Auth: AuthMw = (roles) => (req, res, next) => {
   const appId = req.headers["app-id"];
   const author = req.headers.authorization;
   const token = author?.split(" ")[1];

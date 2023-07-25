@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 
-export interface AuthMidd {
+export interface AuthMw {
   (roles: string[]): RequestHandler;
 }
 

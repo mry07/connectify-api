@@ -22,22 +22,23 @@ export const login = async (req: Request) => {
     await connection.beginTransaction();
 
     // check email and session
-    const [rows] = await connection.execute<RowDataPacket[]>(
-      `SELECT
-        u.id,
-        u.username,
-        u.email,
-        u.password,
-        r.name AS role,
-        IF(us.id, 1, 0) AS session_status
-      FROM
-        users u
-        INNER JOIN roles r ON u.role_id = r.id
-        LEFT JOIN user_sessions us ON us.user_id = u.id AND us.app_id = ?
-      WHERE
-        email = ?`,
-      [appId, email]
-    );
+    const sql = `SELECT
+      u.id,
+      u.username,
+      u.email,
+      u.password,
+      r.name AS role,
+      IF(us.id, 1, 0) AS session_status
+    FROM
+      users u
+      INNER JOIN roles r ON u.role_id = r.id
+      LEFT JOIN user_sessions us ON us.user_id = u.id AND us.app_id = ?
+    WHERE
+      email = ?`;
+    const [rows] = await connection.execute<RowDataPacket[]>(sql, [
+      appId,
+      email,
+    ]);
 
     if (!rows.length) {
       throw new ApiError(HttpStatus.NOT_FOUND, "Email tidak ditemukan");
@@ -89,10 +90,8 @@ export const logout = async (req: Request) => {
     await connection.beginTransaction();
 
     // delete the session
-    const [rows] = await connection.execute<ResultSetHeader>(
-      "DELETE FROM user_sessions WHERE user_id = ? AND app_id = ?",
-      [sub, iss]
-    );
+    const sql = `DELETE FROM user_sessions WHERE user_id = ? AND app_id = ?`;
+    const [rows] = await connection.execute<ResultSetHeader>(sql, [sub, iss]);
 
     // session not found
     if (!rows.affectedRows) {
@@ -116,12 +115,13 @@ export const register = async (req: Request) => {
     await connection.beginTransaction();
 
     // check existing email or username
-    const [user] = await connection.execute<RowDataPacket[]>(
-      `SELECT
-        EXISTS(SELECT 1 FROM users WHERE email = ?) AS email_exist,
-        EXISTS(SELECT 1 FROM users WHERE username = ?) AS username_exist`,
-      [email, username]
-    );
+    const sql1 = `SELECT
+      EXISTS(SELECT 1 FROM users WHERE email = ?) AS email_exist,
+      EXISTS(SELECT 1 FROM users WHERE username = ?) AS username_exist`;
+    const [user] = await connection.execute<RowDataPacket[]>(sql1, [
+      email,
+      username,
+    ]);
 
     if (user[0].email_exist) {
       throw new ApiError(HttpStatus.CONFLICT, "Email sudah digunakan");
@@ -133,10 +133,8 @@ export const register = async (req: Request) => {
 
     // register new user
     const hashedPassword = await Bcrypt.hash(password, 10);
-    await connection.execute(
-      "INSERT INTO users (name, username, email, password) VALUES (?, ?, ?, ?)",
-      [name, username, email, hashedPassword]
-    );
+    const sql2 = `INSERT INTO users (name, username, email, password) VALUES (?, ?, ?, ?)`;
+    await connection.execute(sql2, [name, username, email, hashedPassword]);
 
     await connection.commit();
   } catch (error) {
@@ -155,16 +153,12 @@ export const refreshToken = async (req: Request) => {
   try {
     await connection.beginTransaction();
 
-    // check `refresh_token` field
-    if (refresh_token === undefined) {
-      throw new DevError(HttpStatus.BAD_REQUEST, `missing_parameter`);
-    }
-
     // check user session
-    const [rows] = await connection.execute<RowDataPacket[]>(
-      `SELECT * FROM user_sessions WHERE app_id = ? AND refresh_token = ?`,
-      [appId, refresh_token]
-    );
+    const sql = `SELECT * FROM user_sessions WHERE app_id = ? AND refresh_token = ?`;
+    const [rows] = await connection.execute<RowDataPacket[]>(sql, [
+      appId,
+      refresh_token,
+    ]);
 
     // error if session not found
     if (!rows.length) {
@@ -183,14 +177,12 @@ export const refreshToken = async (req: Request) => {
 
     // error if appId does not match
     if (appId !== decoded.iss) {
+      const errorCode = "an_error_occurred";
+      const errorType = ErrorType.TokenError;
       const httpCode = HttpStatus.UNAUTHORIZED;
+      const httpStatus = httpStatusText(httpCode);
 
-      throw new BaseError({
-        httpCode,
-        errorCode: "an_error_occurred",
-        errorType: ErrorType.TokenError,
-        httpStatus: httpStatusText(httpCode),
-      });
+      throw new BaseError({ httpCode, errorCode, errorType, httpStatus });
     }
 
     // generate new access token

@@ -1,6 +1,6 @@
 import Joi from "joi";
 import { RequestHandler } from "express";
 
-export interface ValidateMidd {
+export interface ValidateMw {
   (schema: Joi.AnySchema): RequestHandler;
 }
