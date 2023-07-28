@@ -1,17 +1,19 @@
 import Bcrypt from "bcrypt";
-import ApiError from "../../../error/api-error.js";
-import DevError from "../../../error/dev-error.js";
-import BaseError from "../../../error/base-error.js";
-import TokenError from "../../../error/token-error.js";
 import JsonWebToken from "jsonwebtoken";
 import * as HttpStatus from "../../../config/constants/http-status.js";
 import { pool } from "../../../config/database.js";
 import { Request } from "express";
-import { ErrorType } from "../../../error/index.types.js";
+import { ErrorType } from "../../../exception/index.types.js";
 import { TokenPayload } from "../../../utils/token.types.js";
 import { httpStatusText } from "../../../utils/http.js";
 import { ResultSetHeader, RowDataPacket } from "mysql2";
 import { generateToken, generateRefreshToken } from "../../../utils/token.js";
+import {
+  BaseError,
+  ApiError,
+  DevError,
+  TokenError,
+} from "../../../exception/index.js";
 
 export const login = async (req: Request) => {
   const appId = req.headers["app-id"];

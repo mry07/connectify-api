@@ -1,8 +1,8 @@
-import BaseError from "./base-error.js";
-import { httpStatusText } from "../utils/http.js";
-import { BaseErrorProps, ErrorType } from "./index.types.js";
+import { BaseError } from "./base-error.js";
+import { httpStatusText } from "../../utils/http.js";
+import { BaseErrorProps, ErrorType } from "../index.types.js";
 
-class DevError extends BaseError {
+export class DevError extends BaseError {
   constructor(httpCode: number, errorCode: string, message?: string) {
     const props: BaseErrorProps = {
       message,
@@ -15,5 +15,3 @@ class DevError extends BaseError {
     super(props);
   }
 }
-
-export default DevError;

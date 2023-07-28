@@ -1,9 +1,8 @@
-import ApiError from "../../../error/api-error.js";
-import DevError from "../../../error/dev-error.js";
 import * as HttpStatus from "../../../config/constants/http-status.js";
 import { pool } from "../../../config/database.js";
 import { Request } from "express";
 import { storeImage } from "../../../utils/image.js";
+import { ApiError, DevError } from "../../../exception/index.js";
 import { ResultSetHeader, RowDataPacket } from "mysql2";
 
 export const newPost = async (req: Request) => {

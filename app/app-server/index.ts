@@ -3,7 +3,7 @@ import Routes from "../app-server/routes/index.js";
 import Express from "express";
 import Headers from "../../middlewares/headers.js";
 import * as Path from "path";
-import * as Error from "../../error/index.js";
+import * as Error from "../../exception/index.js";
 
 const Server = Express();
 

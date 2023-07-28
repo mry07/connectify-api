@@ -1,7 +1,7 @@
 import Express from "express";
 import Headers from "../../middlewares/headers.js";
 import Routes from "./routes/index.js";
-import * as Error from "../../error/index.js";
+import * as Error from "../../exception/index.js";
 
 const Server = Express();
 

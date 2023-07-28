@@ -1,5 +1,5 @@
-import ValidationError from "../error/validation-error.js";
 import { ValidateMw } from "./validate.types.js";
+import { ValidationError } from "../exception/index.js";
 
 const Validate: ValidateMw = (schema) => async (req, res, next) => {
   try {

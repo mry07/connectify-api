@@ -1,9 +1,9 @@
-import BaseError from "./base-error.js";
-import * as HttpStatus from "../config/constants/http-status.js";
-import { ErrorType } from "./index.types.js";
-import { httpStatusText } from "../utils/http.js";
+import * as HttpStatus from "../../config/constants/http-status.js";
+import { BaseError } from "./base-error.js";
+import { ErrorType } from "../index.types.js";
+import { httpStatusText } from "../../utils/http.js";
 
-class ValidationError extends BaseError {
+export class ValidationError extends BaseError {
   constructor(error: any) {
     const errors = [];
     const message = error.message;
@@ -18,5 +18,3 @@ class ValidationError extends BaseError {
     super({ message, errorType, httpCode, httpStatus, errors });
   }
 }
-
-export default ValidationError;

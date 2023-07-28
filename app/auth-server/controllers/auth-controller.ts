@@ -1,6 +1,6 @@
-import DevError from "../../../error/dev-error.js";
 import * as Service from "../services/auth-service.js";
 import * as HttpStatus from "../../../config/constants/http-status.js";
+import { DevError } from "../../../exception/index.js";
 import { RequestHandler } from "express";
 
 export const login: RequestHandler = async (req, res, next) => {

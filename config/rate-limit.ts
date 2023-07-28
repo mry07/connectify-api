@@ -1,7 +1,7 @@
-import ApiError from "../error/api-error.js";
 import * as Time from "./constants/time.js";
 import * as HttpStatus from "./constants/http-status.js";
 import { Options } from "express-rate-limit";
+import { ApiError } from "../exception/index.js";
 import { RequestHandler } from "express";
 
 const handler: RequestHandler = (req, res, next) => {

@@ -1,6 +1,6 @@
-import { ErrorType, BaseErrorProps } from "./index.types.js";
+import { ErrorType, BaseErrorProps } from "../index.types.js";
 
-class BaseError extends Error {
+export class BaseError extends Error {
   errorType: ErrorType;
 
   errorCode?: string;
@@ -38,5 +38,3 @@ class BaseError extends Error {
     Error.captureStackTrace(this);
   }
 }
-
-export default BaseError;

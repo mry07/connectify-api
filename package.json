@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "start": "nodemon --exec ts-node --esm index.ts"
+    "start": "nodemon --exec ts-node --esm --trace-warnings index.ts"
   },
   "repository": {
     "type": "git",
