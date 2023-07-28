@@ -1,7 +1,7 @@
-import * as Service from "../services/post-service";
+import * as Service from "../services/post-service.js";
 import { RequestHandler } from "express";
-import * as HttpStatus from "../../../config/constants/http-status";
-import DevError from "../../../error/dev-error";
+import * as HttpStatus from "../../../config/constants/http-status.js";
+import DevError from "../../../error/dev-error.js";
 
 export const newPost: RequestHandler = async (req, res, next) => {
   try {

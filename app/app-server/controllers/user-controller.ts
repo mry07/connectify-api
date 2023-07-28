@@ -1,4 +1,4 @@
-import * as Service from "../services/user-service";
+import * as Service from "../services/user-service.js";
 import { RequestHandler } from "express";
 
 export const details: RequestHandler = async (req, res, next) => {

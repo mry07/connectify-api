@@ -1,10 +1,10 @@
-import Auth from "../../../middlewares/auth";
+import Auth from "../../../middlewares/auth.js";
 import Express from "express";
-import Validate from "../../../middlewares/validate";
+import Validate from "../../../middlewares/validate.js";
 import RateLimit from "express-rate-limit";
-import * as Controller from "../controllers/auth-controller";
-import * as Validation from "../validations/auth-validation";
-import { login, refreshToken } from "../../../config/rate-limit";
+import * as Controller from "../controllers/auth-controller.js";
+import * as Validation from "../validations/auth-validation.js";
+import { login, refreshToken } from "../../../config/rate-limit.js";
 
 const Router = Express.Router();
 

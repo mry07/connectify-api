@@ -1,4 +1,4 @@
-import { ErrorType, BaseErrorProps } from "./index.types";
+import { ErrorType, BaseErrorProps } from "./index.types.js";
 
 class BaseError extends Error {
   errorType: ErrorType;

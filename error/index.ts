@@ -1,11 +1,11 @@
-import * as Error from "./index.types";
-import * as HttpStatus from "../config/constants/http-status";
+import * as Error from "./index.types.js";
+import * as HttpStatus from "../config/constants/http-status.js";
 import { ErrorRequestHandler, RequestHandler } from "express";
 import {
   ApiErrorResponse,
   DevErrorResponse,
   ValidationErrorResponse,
-} from "./index.types";
+} from "./index.types.js";
 
 export const handler: ErrorRequestHandler = (err, req, res, next) => {
   if (err.errorType === Error.ErrorType.ApiError) {

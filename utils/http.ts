@@ -1,4 +1,4 @@
-import * as HttpStatus from "../config/constants/http-status";
+import * as HttpStatus from "../config/constants/http-status.js";
 
 export const httpStatusText = (status: number) => {
   switch (status) {

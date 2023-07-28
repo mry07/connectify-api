@@ -1,6 +1,6 @@
 import Express from "express";
-import UserRoute from "./user-route";
-import PostRoute from "./post-route";
+import UserRoute from "./user-route.js";
+import PostRoute from "./post-route.js";
 
 const Router = Express.Router();
 

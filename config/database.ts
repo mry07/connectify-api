@@ -1,5 +1,5 @@
 import Mysql from "mysql2/promise";
-import * as Time from "./constants/time";
+import * as Time from "./constants/time.js";
 
 const config: Mysql.PoolOptions = {
   host: "localhost",

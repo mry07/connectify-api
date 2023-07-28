@@ -1,8 +1,8 @@
-import { pool } from "../../../config/database";
+import DevError from "../../../error/dev-error.js";
+import * as HttpStatus from "../../../config/constants/http-status.js";
+import { pool } from "../../../config/database.js";
 import { Request } from "express";
 import { ResultSetHeader, RowDataPacket } from "mysql2";
-import DevError from "../../../error/dev-error";
-import * as HttpStatus from "../../../config/constants/http-status";
 
 export const details = async (req: Request) => {
   const { sub } = req.jwt;

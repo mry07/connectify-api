@@ -2,7 +2,7 @@ import Sharp from "sharp";
 import * as Crypto from "crypto";
 import * as Blurhash from "blurhash";
 import * as FileSystem from "fs/promises";
-import { StoreImage } from "./image.types";
+import { StoreImage } from "./image.types.js";
 
 export const storeImage: StoreImage = async (req, path) => {
   const images = [];

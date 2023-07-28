@@ -1,8 +1,8 @@
 import Multer from "multer";
 import Express from "express";
-import Validate from "../../../middlewares/validate";
-import * as Controller from "../controllers/post-controller";
-import * as Validation from "../validations/post-validation";
+import Validate from "../../../middlewares/validate.js";
+import * as Controller from "../controllers/post-controller.js";
+import * as Validation from "../validations/post-validation.js";
 
 const Router = Express.Router();
 const upload = Multer({ dest: "uploads/" });

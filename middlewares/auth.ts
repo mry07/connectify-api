@@ -1,11 +1,11 @@
-import BaseError from "../error/base-error";
-import TokenError from "../error/token-error";
+import BaseError from "../error/base-error.js";
+import TokenError from "../error/token-error.js";
 import JsonWebToken from "jsonwebtoken";
-import * as HttpStatus from "../config/constants/http-status";
-import { AuthMw } from "./auth.types";
-import { TokenPayload } from "../utils/token.types";
-import { httpStatusText } from "../utils/http";
-import { BaseErrorProps, ErrorType } from "../error/index.types";
+import * as HttpStatus from "../config/constants/http-status.js";
+import { AuthMw } from "./auth.types.js";
+import { TokenPayload } from "../utils/token.types.js";
+import { httpStatusText } from "../utils/http.js";
+import { BaseErrorProps, ErrorType } from "../error/index.types.js";
 
 const Auth: AuthMw = (roles) => (req, res, next) => {
   const appId = req.headers["app-id"];

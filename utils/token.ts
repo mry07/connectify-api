@@ -1,5 +1,5 @@
 import JsonWebToken from "jsonwebtoken";
-import { TokenPayload } from "./token.types";
+import { TokenPayload } from "./token.types.js";
 
 export const generateToken = (payload: TokenPayload) => {
   const token = JsonWebToken.sign(

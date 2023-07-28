@@ -1,9 +1,9 @@
-import Auth from "../../middlewares/auth";
-import Routes from "../app-server/routes";
+import Auth from "../../middlewares/auth.js";
+import Routes from "../app-server/routes/index.js";
 import Express from "express";
-import Headers from "../../middlewares/headers";
+import Headers from "../../middlewares/headers.js";
 import * as Path from "path";
-import * as Error from "../../error";
+import * as Error from "../../error/index.js";
 
 const Server = Express();
 
