@@ -3,7 +3,7 @@ import * as HttpStatus from "../config/constants/http-status.js";
 import { AuthMw } from "./auth.types.js";
 import { TokenPayload } from "../utils/token.types.js";
 import { httpStatusText } from "../utils/http.js";
-import { BaseError, TokenError } from "../exception/index.js";
+import { BaseError, TokenError } from "../exception/errors/index.js";
 import { BaseErrorProps, ErrorType } from "../exception/index.types.js";
 
 const Auth: AuthMw = (roles) => (req, res, next) => {

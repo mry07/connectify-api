@@ -7,12 +7,6 @@ import {
   ValidationErrorResponse,
 } from "./index.types.js";
 
-export * from "./errors/base-error.js";
-export * from "./errors/api-error.js";
-export * from "./errors/dev-error.js";
-export * from "./errors/token-error.js";
-export * from "./errors/validation-error.js";
-
 export const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
   if (err.errorType === Error.ErrorType.ApiError) {
     res.status(err.httpCode).send({

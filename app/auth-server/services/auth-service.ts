@@ -13,7 +13,7 @@ import {
   ApiError,
   DevError,
   TokenError,
-} from "../../../exception/index.js";
+} from "../../../exception/errors/index.js";
 
 export const login = async (req: Request) => {
   const appId = req.headers["app-id"];

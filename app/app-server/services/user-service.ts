@@ -1,7 +1,7 @@
 import * as HttpStatus from "../../../config/constants/http-status.js";
 import { pool } from "../../../config/database.js";
 import { Request } from "express";
-import { DevError } from "../../../exception/index.js";
+import { DevError } from "../../../exception/errors/index.js";
 import { ResultSetHeader, RowDataPacket } from "mysql2";
 
 export const details = async (req: Request) => {
