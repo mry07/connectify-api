@@ -1,7 +1,7 @@
 import Express from "express";
 import Headers from "../../middlewares/headers.js";
 import Routes from "./routes/index.js";
-import * as Error from "../../exception/index.js";
+import * as Exception from "../../exception/index.js";
 
 const Server = Express();
 
@@ -13,7 +13,7 @@ Server.use(Headers);
 Server.use("/api/v1", Routes);
 
 // error handler
-Server.use(Error.handler);
-Server.use(Error.endpoint);
+Server.use(Exception.errorHandler);
+Server.use(Exception.errorEndpoint);
 
 export default Server;

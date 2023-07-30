@@ -13,7 +13,7 @@ export * from "./errors/dev-error.js";
 export * from "./errors/token-error.js";
 export * from "./errors/validation-error.js";
 
-export const handler: ErrorRequestHandler = (err, req, res, next) => {
+export const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
   if (err.errorType === Error.ErrorType.ApiError) {
     res.status(err.httpCode).send({
       status: err.errorType,
@@ -47,7 +47,7 @@ export const handler: ErrorRequestHandler = (err, req, res, next) => {
   });
 };
 
-export const endpoint: RequestHandler = (req, res, next) => {
+export const errorEndpoint: RequestHandler = (req, res, next) => {
   res.status(HttpStatus.NOT_FOUND).send({
     status: Error.ErrorType.DevError,
     error_code: "invalid_endpoint",
